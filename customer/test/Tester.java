@@ -17,6 +17,7 @@ public class Tester {
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			System.out.println("eRR!!!");
 		}
 		
