@@ -2,22 +2,23 @@ package com.customer;
 
 import java.time.LocalDate;
 
-public class Customer {
+public class Customer implements Comparable<Customer>{
 
 	private static int customerId;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String password;
-	private Double regAmount;
+	private double regAmount;
 	private LocalDate dob;
 	private serviceplan plan;
+	private LocalDate lastSubscriptionPaidDate;
 	
 	static {
 		customerId=1001;
 	}
 	
-	public Customer(String firstName, String lastName, String email, String password, Double regAmount, LocalDate dob, serviceplan plan) {
+	public Customer(String firstName, String lastName, String email, String password, double regAmount, LocalDate dob, serviceplan plan, LocalDate lastSubscriptionPaidDate) {
 		super();
 		customerId++;
 		this.firstName = firstName;
@@ -27,28 +28,38 @@ public class Customer {
 		this.regAmount = regAmount;
 		this.dob = dob;
 		this.plan = plan;
+		this.lastSubscriptionPaidDate=lastSubscriptionPaidDate;
 	}
 	
-	public Customer(String email, String password)
+	public Customer(String email)
 	{
 		this.email = email;
-		this.password = password;
 	}
+
+
 
 	@Override
 	public String toString() {
-		return "Customer [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", regAmount="
-				+ regAmount + ", plan=" + plan + "]";
+		return "Customer [customerId "+customerId +"firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password="
+				+ password + ", regAmount=" + regAmount + ", dob=" + dob + ", plan=" + plan
+				+ ", lastSubscriptionPaidDate=" + lastSubscriptionPaidDate + "]";
 	}
-	
+
 	@Override
 	public boolean equals (Object o)
 	{
 		System.out.println("--> Equals method <---");
-		Customer c= (Customer)o;
 		if(o instanceof Customer)
-			return this.email.equals(c.email);
+			return this.email.equals(((Customer)o).email);
 		return false;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
 	}
 
 	public String getEmail() {
@@ -59,8 +70,21 @@ public class Customer {
 		return password;
 	}
 
+	public LocalDate getDob() {
+		return dob;
+	}
+
+	public LocalDate getLastSubscriptionPaidDate() {
+		return lastSubscriptionPaidDate;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Override
+	public int compareTo(Customer c) {
+			return this.email.compareTo(c.email);
 	}
 	
 	

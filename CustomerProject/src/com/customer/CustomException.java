@@ -1,5 +1,6 @@
 package com.customer;
 
+@SuppressWarnings("serial")
 public class CustomException extends Exception{
 	public CustomException(String msg)
 	{
